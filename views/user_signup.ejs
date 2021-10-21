@@ -9,10 +9,11 @@
 <body>
     <h1><%= title %></h1>
 
-    <form action="/users/user-entry" method="post">
+    <form action="/users/user-creation" method="post">
         <input type="email" name="email" placeholder="Email">
-        <input type="password" minlength="8" name="password" placeholder="password">
         <input type="text" name="name" placeholder="Name">        
+        <input type="password" minlength="8" name="password" placeholder="password">
+        <input type="password" minlength="8" name="confirm_password" placeholder="Confirm Password">
         <input type="submit" value="Sign Up">
     </form>
 </body>

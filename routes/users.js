@@ -9,6 +9,7 @@ router.get('/images', userController.images);
 router.get('/signup', userController.signup);
 router.get('/signin', userController.signin);
 
-router.post('/user-entry', userController.user_entry);
+router.post('/user-creation', userController.user_creation);
+router.post('/user-session', userController.user_session);
 
 module.exports = router;
