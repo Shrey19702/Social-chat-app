@@ -3,6 +3,7 @@ const app = express();
 const port = 8000
 
 // using express router 
+app.use(express.urlencoded());
 app.use('/', require('./routes/index'));    //middleware
 
 // setting up views
