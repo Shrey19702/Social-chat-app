@@ -7,6 +7,8 @@ const port = 8000
 const session = require('express-session');
 const passport = require('passport');
 const localPassport = require('./config/passport-local-strategy');
+//storing cookies in mongo for if server restarts
+const MongoStore = require('connect-mongo');
 
 // using express router 
 app.use(express.urlencoded());
@@ -22,7 +24,17 @@ app.use(
             resave: false,
             cookie:{
                 maxAge: (1000*60*100)
-            }
+            },
+            //storing cookies in mongo for if server restarts
+            store: MongoStore.create(
+                {
+                    mongoUrl: 'mongodb://localhost/chat_app',  // new method from version 4 of connect-mongo
+                    autoRemove: 'disabled'
+                },
+                function(error){
+                    console.log('error in storing cookies in db',error);
+                }
+            )
         }
     )
 );

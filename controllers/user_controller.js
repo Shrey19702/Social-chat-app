@@ -1,8 +1,10 @@
 // require Users collection
 const User = require('../models/user_model'); 
 
+
 //Profile
-module.exports.profile= function(req, res){
+module.exports.profile = function(req, res){
+    // User.findById(req.cookies.)
     return res.render('user_profile', {
         "username": "xyz"   
     });
@@ -16,6 +18,10 @@ module.exports.images= function(req, res){
 
 // Sign Up
 module.exports.signup= function(req, res){
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile')
+    }
+
     return res.render('user_signup', {
         "title": "user->signup page"
     });
@@ -23,6 +29,10 @@ module.exports.signup= function(req, res){
 
 // Sign In
 module.exports.signin= function(req, res){
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile')
+    }
+
     return res.render('user_signin', {
         "title": "user->signin page"
     });
