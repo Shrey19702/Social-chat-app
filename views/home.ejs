@@ -8,5 +8,14 @@
 </head>
 <body>
     <h1> MAIN PAGE -> <%= locals.title%> </h1>
+
+    <% if(locals.user){ %> 
+        <%= user.name %>
+        <a href="/users/profile">profile</a>
+        <a href="/users/signout">signout</a>
+    <%}else{%> 
+        <a href="/users/signin">sign-in</a>
+        <a href="/users/signup">sign-up</a>
+    <%}%>
 </body>
 </html>

@@ -14,7 +14,12 @@ const MongoStore = require('connect-mongo');
 app.use(express.urlencoded());
 app.use(cookieParser());
 
+// setting up views
+app.set('view engine', 'ejs');
+app.set('views', './views');
+
 //authentication
+// mongo store is used to store the session cookie in the db
 app.use(
     session(
         {
@@ -38,13 +43,11 @@ app.use(
         }
     )
 );
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-// setting up views
-app.set('view engine', 'ejs');
-app.set('views', './views');
+app.use(passport.setAuthenticatedUser);
 
 //transfering request to routes
 app.use('/', require('./routes/index'));    
@@ -57,4 +60,4 @@ app.listen(port,
         }
         console.log(`server is running on port ${port}`);
     }  
-);
+    );

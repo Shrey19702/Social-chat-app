@@ -9,6 +9,7 @@ router.get('/profile', passport.checkAuthentication ,userController.profile);
 router.get('/images', userController.images);
 router.get('/signup', userController.signup);
 router.get('/signin', userController.signin);
+router.get('/signout', userController.user_end_session);
 
 router.post('/user-creation', userController.user_creation);
 

@@ -77,3 +77,9 @@ module.exports.user_creation= function(req,res){
 module.exports.user_session= function(req,res){
    return res.redirect('/');
 }
+
+//Sign out
+module.exports.user_end_session = function(req, res){
+    req.logout();
+    return res.redirect('/');
+}
