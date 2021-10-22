@@ -4,14 +4,39 @@ const db= require('./config/mongoose');
 const app = express();
 const port = 8000
 
+const session = require('express-session');
+const passport = require('passport');
+const localPassport = require('./config/passport-local-strategy');
+
 // using express router 
 app.use(express.urlencoded());
 app.use(cookieParser());
-app.use('/', require('./routes/index'));    //middleware
+
+//authentication
+app.use(
+    session(
+        {
+            name: 'chatapp',
+            secret: 'testcode123',
+            saveUninitialized: false,
+            resave: false,
+            cookie:{
+                maxAge: (1000*60*100)
+            }
+        }
+    )
+);
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 // setting up views
 app.set('view engine', 'ejs');
 app.set('views', './views');
+
+//transfering request to routes
+app.use('/', require('./routes/index'));    
+
 
 app.listen(port, 
     function(error){

@@ -65,8 +65,5 @@ module.exports.user_creation= function(req,res){
 
 //  Sign In handeller
 module.exports.user_session= function(req,res){
-   
-    console.log('form submitted');
-    console.log(req.body);
-    return res.redirect('back');
+   return res.redirect('/');
 }
