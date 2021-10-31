@@ -1,6 +1,5 @@
 // require Users collection
-const User = require('../models/user_model'); 
-
+const User = require('../models/user_model');   // user's data stored in mongo 
 
 //Profile
 module.exports.profile = function(req, res){
@@ -9,6 +8,7 @@ module.exports.profile = function(req, res){
         "username": "xyz"   
     });
 }
+
 // Images
 module.exports.images= function(req, res){
     return res.render('user_images', {
@@ -18,7 +18,7 @@ module.exports.images= function(req, res){
 
 // Sign Up
 module.exports.signup= function(req, res){
-    if(req.isAuthenticated()){
+    if(req.isAuthenticated()){  //check if already authenticated
         return res.redirect('/users/profile')
     }
 
@@ -29,7 +29,7 @@ module.exports.signup= function(req, res){
 
 // Sign In
 module.exports.signin= function(req, res){
-    if(req.isAuthenticated()){
+    if(req.isAuthenticated()){  //check if already authenticated
         return res.redirect('/users/profile')
     }
 
@@ -42,15 +42,15 @@ module.exports.signin= function(req, res){
 //   Sign Up handeler
 module.exports.user_creation= function(req,res){
     //check password
-    if(req.body.password == req.body.confirm_password){
+    if(req.body.password === req.body.confirm_password){
         //check if same user exist
-        User.findOne(
+        User.findOne( 
             {email:req.body.email},
             function(error, f_user){
                 if(error){console.log("error in finding users");return;}
                 //create user if it doesn't exit
                 else if(!f_user){
-                    User.create(req.body,
+                    User.create(req.body,   //only the details given in the User schema will be added
                         function(error){
                             if(error){console.log("error in creating users");return;}
                         }
@@ -68,9 +68,6 @@ module.exports.user_creation= function(req,res){
     else{
         res.redirect('back');
     }
-    // console.log('form submitted');
-    // console.log(req.body);
-    // return res.redirect('/users/signin');
 }
 
 //  Sign In handeller
@@ -80,6 +77,6 @@ module.exports.user_session= function(req,res){
 
 //Sign out
 module.exports.user_end_session = function(req, res){
-    req.logout();
+    req.logout();   // passport's integration(defined function)
     return res.redirect('/');
 }

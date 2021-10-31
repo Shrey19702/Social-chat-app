@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose');   //mongoose to interact with mongoDB
 
-const userSchema = new mongoose.Schema(
+const userSchema = new mongoose.Schema( //making new schema for users details
     {
         email:{
             type:String,
@@ -21,6 +21,6 @@ const userSchema = new mongoose.Schema(
     }
 );
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);    //making model for interacting
 
 module.exports = User;

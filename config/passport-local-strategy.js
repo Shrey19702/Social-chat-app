@@ -1,6 +1,6 @@
 const passport= require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const User = require('../models/user_model');
+const LocalStrategy = require('passport-local').Strategy;   //passport local package <for setting up local files> 
+const User = require('../models/user_model');   // users data model
 
 //authentication using passport
 passport.use(new LocalStrategy(
@@ -64,7 +64,7 @@ passport.checkAuthentication = function(req,res, next){
 passport.setAuthenticatedUser = function(req,res, next){
     // req.user contains the current signed in user from the session cookie and we are sending this to locals for the views
     if(req.isAuthenticated()){
-        res.locals.user = req.user;
+        res.locals.user = req.user; //passing users data from request to response
     }
     next();
 }
