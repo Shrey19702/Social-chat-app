@@ -1,0 +1,31 @@
+header {
+  height: 10vh;
+  background-color: #004643;
+  color: #fffffe;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center; }
+  header h1 {
+    margin: 0;
+    color: #fffffe; }
+  header a {
+    margin-left: 30px;
+    color: #abd1c6;
+    text-decoration: none; }
+  header a:hover {
+    text-decoration: none;
+    color: #f9bc60; }
+  header .user-id {
+    width: 155px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between; }
+    header .user-id .user-profile {
+      border: none;
+      cursor: pointer;
+      height: 6vh;
+      width: 6vh;
+      border-radius: 50%;
+      background-color: aliceblue; }

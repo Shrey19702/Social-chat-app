@@ -5,6 +5,7 @@ const User = require('../models/user_model');   // user's data stored in mongo
 module.exports.profile = function(req, res){
     // User.findById(req.cookies.)
     return res.render('user_profile', {
+        "title" : "USERS Profile page",
         "username": "xyz"   
     });
 }
@@ -12,7 +13,7 @@ module.exports.profile = function(req, res){
 // Images
 module.exports.images= function(req, res){
     return res.render('user_images', {
-        "title": "user->images"
+        "title": "User images"
     });
 }
 
@@ -23,7 +24,7 @@ module.exports.signup= function(req, res){
     }
 
     return res.render('user_signup', {
-        "title": "user->signup page"
+        "title": "User Signup page"
     });
 }
 
@@ -34,7 +35,7 @@ module.exports.signin= function(req, res){
     }
 
     return res.render('user_signin', {
-        "title": "user->signin page"
+        "title": "User Signin page"
     });
 }
 

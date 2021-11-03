@@ -1,5 +1,7 @@
 const express = require('express');
 const cookieParser = require('cookie-parser'); 
+const sassMiddleware = require('node-sass-middleware');
+const expressLayouts = require('express-ejs-layouts');
 const db= require('./config/mongoose');
 const app = express();  // launching the server
 const port = 8000
@@ -10,13 +12,31 @@ const localPassport = require('./config/passport-local-strategy');
 //storing cookies in mongo for if server restarts
 const MongoStore = require('connect-mongo');
 
+//......MIDDLEWARES.......
+app.use(sassMiddleware(
+    {
+        src: './assets/scss', //where to get the scss for css
+        dest: './assets/css', //where to keep the converted css files
+        debug: true, //whether to get the errors or not(use false for production mode)
+        outputStyle: 'extended', //to get css written normally(readable)=>extended /or compressed
+        prefix: '/css', // where you will be searching the css files in the views
+         
+    }
+));
+
 // using express router 
 app.use(express.urlencoded()); // to take data from forms in req.body 
 app.use(cookieParser());
 
+app.use(express.static('./assets'));
+
 // setting up views
 app.set('view engine', 'ejs');
 app.set('views', './views');
+
+app.set('layout extractScripts', true); //assets js files(dom) extraction
+app.set('layout extractionStyles', true); //assets csss files extraction
+app.use(expressLayouts);
 
 //authentication
 app.use(

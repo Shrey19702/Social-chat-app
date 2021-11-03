@@ -6,7 +6,7 @@ module.exports.home= function(req, res){
 
 module.exports.homeImages= function(req, res){
     return res.render('home_images', {
-        "title": "home images"
+        "title": "Home Page Images"
     });
 }
 
