@@ -6,3 +6,5 @@ body {
   body h1 {
     color: #001e1d;
     margin-top: 0; }
+  body #main-layout {
+    min-height: 60vh; }

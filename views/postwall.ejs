@@ -1,11 +1,13 @@
 <h4>this is postwall page content</h4>
 
 <section>
-    <h4>Post something ...</h4>
-    <form action="/posts/createPost" method="post" >
-        <textarea name="content" id="post-text" placeholder="say something" cols="30" rows="10"></textarea>
-        <input type="submit" value="POST">
-    </form>
+    <% if(locals.user){ %>
+        <h4>Post something ...</h4>
+        <form action="/posts/createPost" method="post" >
+            <textarea name="content" id="post-text" placeholder="say something" cols="30" rows="10"></textarea>
+            <input type="submit" value="POST">
+        </form>
+    <%} %>
 
     <h3>POSTS</h3>
     <ul>
