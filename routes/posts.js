@@ -8,4 +8,6 @@ const postController = require('../controllers/posts_controller'); // controller
 router.get('/postwall', postController.postwall);
 router.post('/createPost' ,passport.checkAuthentication ,postController.createPost);
 
+router.use('/comments', require('./comments'));
+
 module.exports = router;
