@@ -1,9 +1,25 @@
 const Post = require('../models/post_model');
 
 module.exports.postwall=function (req, res){
-    res.render('postwall', {
-        "title": "postwall"
-    });
+    // Post.find({},
+    //     function(error, post){
+    //         if(error){console.log('erorr in printing posts'); return;}
+    //         return res.render('postwall', {
+    //             "title": "postwall",
+    //             "posted": post
+    //         });
+    //     }
+    // );
+
+    Post.find({}).populate('user').exec(
+        function(error, post){
+            if(error){console.log('erorr in printing posts'); return;}
+            return res.render('postwall', {
+                "title": "postwall",
+                "posted": post
+            });
+        }
+    )
 }
 
 module.exports.createPost = function(req, res){

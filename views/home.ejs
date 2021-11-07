@@ -1,10 +1,12 @@
-    <!-- <link rel="stylesheet" href="/css/views.css"> -->
-    
-    <% if(locals.user){ %> 
-        <%= user.name %>
-        <a href="/users/profile">profile</a>
-        <a href="/users/signout">signout</a>
-    <%}else{%> 
-        <a href="/users/signin">sign-in</a>
-        <a href="/users/signup">sign-up</a>
-    <%}%>
+<!-- <link rel="stylesheet" href="/css/views.css"> -->
+
+<% if(locals.user){ %> 
+    <%= user.name %>
+    <a href="/users/profile">profile</a>
+    <a href="/users/signout">signout</a>
+<%}else{%> 
+    <a href="/users/signin">sign-in</a>
+    <a href="/users/signup">sign-up</a>
+<%}%>
+
+<a href="/posts/postwall">PostWall</a>
