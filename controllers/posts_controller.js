@@ -54,7 +54,7 @@ module.exports.deletePost = function(req, res){
                 );
             }
             else{
-                console.log('the user logged in cannot delete this post');
+                console.log('error: logged in user in not permitted to delete this post');
                 return res.redirect('back');
             }
         }
