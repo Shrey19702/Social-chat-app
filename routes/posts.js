@@ -7,6 +7,7 @@ const postController = require('../controllers/posts_controller'); // controller
 
 router.get('/postwall', postController.postwall);
 router.post('/createPost' ,passport.checkAuthentication ,postController.createPost);
+router.get('/deletePost/:id',passport.checkAuthentication ,postController.deletePost);
 
 router.use('/comments', require('./comments'));
 

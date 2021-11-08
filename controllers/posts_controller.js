@@ -2,7 +2,6 @@ const Post = require('../models/post_model');
 const Comment = require('../models/comment_model');
 
 module.exports.postwall=function (req, res){
-
     Post.find({})
     .populate('user')
     .populate({
@@ -33,6 +32,31 @@ module.exports.createPost = function(req, res){
             if(error){console.log('error in creating a new post'); return;}
 
             return res.redirect('back');
+        }
+    );
+}
+
+module.exports.deletePost = function(req, res){
+    Post.findById(req.params.id, 
+        function(error, fpost){
+            if(error){console.log('error in finding the post');return;}
+            
+            //req.user.id is made by mongoose to compare it as string instead of req.user._id
+            if(fpost.user == req.user.id){
+                fpost.remove();
+
+                Comment.deleteMany(
+                    {post: req.params.id},
+                    function(error){
+                        if(error){console.log('error in deleting the comments for the post');return;}
+                        return res.redirect('back');
+                    }
+                );
+            }
+            else{
+                console.log('the user logged in cannot delete this post');
+                return res.redirect('back');
+            }
         }
     );
 }
