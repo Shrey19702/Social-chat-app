@@ -4,10 +4,15 @@ const User = require('../models/user_model');   // user's data stored in mongo
 //Profile
 module.exports.profile = function(req, res){
     // User.findById(req.cookies.)
-    return res.render('user_profile', {
-        "title" : "USERS Profile page",
-        "username": "xyz"   
-    });
+    User.findById(req.params.id, 
+        function(error, f_user){
+            if(error){console.log('error: unable to access the requested document from User model'); return;}
+            return res.render('user_profile', {
+                "title" : "USERS Profile page",
+                user_profile : f_user,
+            });
+        }    
+    );
 }
 
 // Images
@@ -20,7 +25,7 @@ module.exports.images= function(req, res){
 // Sign Up
 module.exports.signup= function(req, res){
     if(req.isAuthenticated()){  //check if already authenticated
-        return res.redirect('/users/profile')
+        return res.redirect('/users/profile/'+req.user.id);
     }
 
     return res.render('user_signup', {
@@ -31,7 +36,7 @@ module.exports.signup= function(req, res){
 // Sign In
 module.exports.signin= function(req, res){
     if(req.isAuthenticated()){  //check if already authenticated
-        return res.redirect('/users/profile')
+        return res.redirect('/users/profile/'+req.user.id);
     }
 
     return res.render('user_signin', {
