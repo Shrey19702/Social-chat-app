@@ -6,6 +6,7 @@ const router = express.Router(); // router to handle request (like app)
 const userController = require('../controllers/user_controller'); // controller for users
 
 router.get('/profile/:id', passport.checkAuthentication ,userController.profile); //first check for authentication using func.1 then the func.1 calls for profile(func2) if checked right 
+router.post('/user-update/:id', userController.user_update);
 router.get('/images', userController.images);
 router.get('/signup', userController.signup);   //page for user signup
 router.get('/signin', userController.signin);   // page for user signin

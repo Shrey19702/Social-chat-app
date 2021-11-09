@@ -3,3 +3,12 @@
     <h3><%= user_profile.name%></h3>
     <p><%= user_profile.email%></p>
 
+    <% if(user.id == user_profile.id){%>
+        <h4>Update data</h4>
+        <form action="/users/user-update/<%=user.id%>" method="post">
+            <input type="text" name="name" placeholder="Your Name" value="<%=user.name%>">
+            <input type="email" name="email" placeholder="Your Email" value="<%=user.email%>">
+            <input type="submit" value="Update details">
+        </form>
+    <%}%>
+

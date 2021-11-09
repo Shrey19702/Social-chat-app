@@ -15,6 +15,23 @@ module.exports.profile = function(req, res){
     );
 }
 
+//Update user data
+module.exports.user_update= function(req,res){
+    if(req.params.id == req.user.id){
+        User.findByIdAndUpdate(
+            req.params.id, 
+            req.body,
+            function(error, user){
+                if(error){console.log('error: unable to update user data');return;}
+                return res.redirect('back');
+            } 
+        );
+    }
+    else{
+        return res.status(401).send('Unauthorized');
+    }
+}
+
 // Images
 module.exports.images= function(req, res){
     return res.render('user_images', {
