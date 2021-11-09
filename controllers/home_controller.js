@@ -1,4 +1,8 @@
+const User = require('../models/user_model');
 module.exports.home= function(req, res){
+    User.find({},
+        function(error, users)
+    );
     return res.render('home', {
         "title" : "HOME PAGE"
     });

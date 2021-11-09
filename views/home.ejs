@@ -10,3 +10,15 @@
 <%}%>
 
 <a href="/posts/postwall">PostWall</a>
+
+<section>
+    <h4>Friends</h4>
+    <ul>
+        <% for(u of all_Users){ %>
+            <li>
+                <h3><%=u.name %></h3>
+                <a href="/users/profile/<%=u.id%>"><%= u.name%> profile</a>
+            </li>
+        <%}%>
+    </ul>
+</section>
