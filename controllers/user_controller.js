@@ -20,6 +20,7 @@ module.exports.user_update= async function(req,res){
     try{
         if(req.params.id == req.user.id){
             let user = await User.findByIdAndUpdate(req.params.id, req.body);
+            req.flash('success', 'user details updated')
             return res.redirect('back');
         }
         else{
@@ -27,8 +28,8 @@ module.exports.user_update= async function(req,res){
         }
     }
     catch(error){
-        console.log('error: ',error);
-        return;
+        req.flash('error', error);
+        return res.redirect('back');
     }
 }
 
@@ -58,6 +59,7 @@ module.exports.images= function(req, res){
 // Sign Up
 module.exports.signup= function(req, res){
     if(req.isAuthenticated()){  //check if already authenticated
+        req.flash('error', 'user already logged in')
         return res.redirect('/users/profile/'+req.user.id);
     }
 
@@ -69,6 +71,7 @@ module.exports.signup= function(req, res){
 // Sign In
 module.exports.signin= function(req, res){
     if(req.isAuthenticated()){  //check if already authenticated
+        req.flash('error', 'user already logged in')
         return res.redirect('/users/profile/'+req.user.id);
     }
 
@@ -89,21 +92,24 @@ module.exports.user_creation= async function(req,res){
             //create user if it doesn't exit
             if(!f_user){
                 await User.create(req.body)  //only the details given in the User schema will be added
+                req.flash('success','new account created');
                 return res.redirect('/users/signin');
             }
             //if user already exist
             else{
+                req.flash('error', 'given email already has a account');
                 return res.redirect('back');
             }
         }
         //passwords don't match
         else{
+            req.flash('error', "given passwords don't match");
             res.redirect('back');
         }
     }
     catch(error){
-        console.log('error: ',error);
-        return;
+        req.flash('error', error);
+        return res.redirect('back');
     }
 }
 

@@ -19,8 +19,8 @@ module.exports.postwall= async function (req, res){
     });
     }
     catch(error){
-        console.log('error: ',error);
-        return;
+        req.flash('error', error);
+        return res.redirect('back');
     }
 }
 
@@ -52,8 +52,11 @@ module.exports.createPost = function(req, res){
             user : req.user._id, 
         },
         function (error , post){
-            if(error){console.log('error in creating a new post'); return;}
-
+            if(error){     
+                req.flash('error', error);
+                return res.redirect('back');
+            }
+            req.flash('info', 'post created');
             return res.redirect('back');
         }
     );
@@ -68,16 +71,17 @@ module.exports.deletePost = async function(req, res){
         if(f_post.user == req.user.id){
             f_post.remove();
             Comment.deleteMany( {post: req.params.id});
+            req.flash('info', 'post deleted');
             return res.redirect('back');
         }
         else{
-            console.log('error: logged in user in not permitted to delete this post');
+            req.flash('error', 'post cannot be deleted by logged in user');
             return res.redirect('back');
         }
     }
     catch(error){
-        console.log('error: ',error);
-        return;
+        req.flash('error', error);
+        return res.redirect('back');
     }
 }
 

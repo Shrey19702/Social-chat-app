@@ -16,11 +16,12 @@ module.exports.createComment= async function(req, res){
             fpost.comments.push(comment);    //add the given comment to the comment array in hte post db
             fpost.save(); // save the changes in the db
         }
+        req.flash('info', 'comment created');
         return res.redirect('back');
     }
     catch(error){
-        console.log('error: ',error);
-        return;
+        req.flash('error', error);
+        return res.redirect('back');
     }
 }
 
@@ -58,16 +59,17 @@ module.exports.deleteComment= async function(req, res){
             f_comment.remove();
 
             let f_post = await Post.findByIdAndUpdate(postId, { $pull: {comments: req.params.id} });
+            req.flash('info', 'comment deleted');
             return res.redirect('back');
         }
         else{
-            console.log('error: logged in user in not permitted to delete this comment');
+            req.flash('error', 'error: logged in user in not permitted to delete this comment');
             return res.redirect('back');
         }    
     }
     catch(error){
-        console.log('error: ',error);
-        return;
+        req.flash('error', error);
+        return res.redirect('back');
     }
 }
 
