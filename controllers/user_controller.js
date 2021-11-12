@@ -139,11 +139,14 @@ module.exports.user_creation= async function(req,res){
 
 //  Sign In handeller
 module.exports.user_session= function(req,res){
+    req.flash('success', 'you have logged in');
    return res.redirect('/');
 }
 
 //Sign out
 module.exports.user_end_session = function(req, res){
     req.logout();   // passport's integration(defined function)
+
+    req.flash('success', 'you have logged out');
     return res.redirect('/');
 }

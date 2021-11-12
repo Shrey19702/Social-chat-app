@@ -12,6 +12,9 @@ const localPassport = require('./config/passport-local-strategy');
 //storing cookies in mongo for if server restarts
 const MongoStore = require('connect-mongo');
 
+const flash = require('connect-flash');
+const flash_Mware = require('./config/flash-mware');
+
 //......MIDDLEWARES.......
 app.use(sassMiddleware(
     {
@@ -69,6 +72,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(passport.setAuthenticatedUser); //setAuthenticated is made in local config passport file
+
+app.use(flash());
+app.use(flash_Mware.setFlash);
 
 //transfering request to routes
 app.use('/', require('./routes/index')); // request transfered to index.js in routes folder    
