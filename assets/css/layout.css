@@ -6,5 +6,10 @@ body {
   body h1 {
     color: #001e1d;
     margin-top: 0; }
+  body #main-cont {
+    min-height: 60vh;
+    width: 82vw; }
   body #main-layout {
-    min-height: 60vh; }
+    display: flex;
+    flex-direction: row;
+    position: relative; }

@@ -9,9 +9,16 @@ body{
         margin-top: 0;
     }
 
-    #main-layout{
+    #main-cont{
         // height: 60vh;
         min-height: 60vh;
+        width: 82vw;
+    }
+
+    #main-layout{
+        display: flex;
+        flex-direction: row;
+        position: relative;
     }
 }
 

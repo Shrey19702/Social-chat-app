@@ -10,13 +10,18 @@
     <link rel="stylesheet" href="/css/layout.css">
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/sideBar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
 </head>
 <body>
     <%- include('_header'); %>
+
     <main id="main-layout">
-        <%- body %>
+        <%- include('_sideBar'); %>
+        <div id="main-cont">
+            <%- body %>
+        </div>
     </main>
 
     <%- include('_footer'); %>

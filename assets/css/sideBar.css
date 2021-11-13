@@ -1,0 +1,28 @@
+#sideBar {
+  background-color: #004643;
+  color: #abd1c6;
+  height: 101vh;
+  width: 18vw;
+  position: sticky;
+  top: 0; }
+  #sideBar .sideBar-links {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    position: sticky;
+    top: 0; }
+  #sideBar a {
+    display: block;
+    color: #abd1c6;
+    text-decoration: none;
+    margin: 0.5rem; }
+  #sideBar a:hover {
+    text-decoration: none;
+    color: #f9bc60; }
+  #sideBar .footer-links {
+    height: 20vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap; }
