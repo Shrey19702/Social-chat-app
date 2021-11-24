@@ -34,6 +34,8 @@ module.exports.createPost = async function(req, res){
         )
 
         if(req.xhr){
+            await req.flash('info', 'post created');
+
             let post = await Post.findById(newPost._id)
             .populate('user');
 
@@ -66,6 +68,9 @@ module.exports.deletePost = async function(req, res){
             await Comment.deleteMany( {post: req.params.id});
             
             if(req.xhr){
+            
+                await req.flash('info', 'post deleted'); 
+
                 return res.status(200).json({
                     data: {
                         post_id: req.params.id
