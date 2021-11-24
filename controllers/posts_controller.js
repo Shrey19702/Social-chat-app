@@ -63,7 +63,17 @@ module.exports.deletePost = async function(req, res){
         //req.user.id is made by mongoose to compare it as string instead of req.user._id
         if(f_post.user == req.user.id){
             f_post.remove();
-            Comment.deleteMany( {post: req.params.id});
+            await Comment.deleteMany( {post: req.params.id});
+            
+            if(req.xhr){
+                return res.status(200).json({
+                    data: {
+                        post_id: req.params.id
+                    },
+                    message: 'post deleted'
+                });
+            }
+
             req.flash('info', 'post deleted');
             return res.redirect('back');
         }

@@ -12,14 +12,17 @@
                 success: function(data){
                     let newPost = postDom(data.data.post);
                     $('#post-list-container').prepend(newPost);
+                    deletePost($(' .delete-post-button', newPost));
                 },
                 error: function(error){
                     console.log(error.responseText)
                 }
             });
+            $('textarea#post-text').val('');
         });
     }
 
+    //method to create the list element for prepending it in dom
     let postDom = function(post){
         // console.log(post.user);
         return $(
@@ -28,7 +31,7 @@
                 <p>
                     ${post.content} 
                     &nbsp; 
-                    <a class="delete-post-button" href="/posts/deletePost/${post.id}">X</a>
+                    <a class="delete-post-button" href="/posts/deletePost/${post._id}">X</a>
                 </p>
                 <p>${post.user.name}</p>
             </div>
@@ -43,6 +46,24 @@
                 </ul>
             </div>
         </li>`);
+    }
+
+    //method to delete a post from dom
+    let deletePost = function(deleteLink){
+        $(deleteLink).click(function(e){
+            e.preventDefault();
+        
+            $.ajax({
+                type: 'get',
+                url: $(deleteLink).prop('href'),
+                success: function(data){
+                    $(`#post-${data.data.post_id}`).remove();
+                },
+                error: function(error){
+                    console.log(error.responseText);
+                }
+            });
+        });
     }
 
     createPost();
