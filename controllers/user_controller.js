@@ -33,22 +33,6 @@ module.exports.user_update= async function(req,res){
     }
 }
 
-// module.exports.user_update= function(req,res){
-//     if(req.params.id == req.user.id){
-//         User.findByIdAndUpdate(
-//             req.params.id, 
-//             req.body,
-//             function(error, user){
-//                 if(error){console.log('error: unable to update user data');return;}
-//                 return res.redirect('back');
-//             } 
-//         );
-//     }
-//     else{
-//         return res.status(401).send('Unauthorized');
-//     }
-// }
-
 // Images
 module.exports.images= function(req, res){
     return res.render('user_images', {
@@ -79,7 +63,6 @@ module.exports.signin= function(req, res){
         "title": "User Signin page"
     });
 }
-
 
 //   Sign Up handeler
 module.exports.user_creation= async function(req,res){
@@ -112,36 +95,6 @@ module.exports.user_creation= async function(req,res){
         return res.redirect('back');
     }
 }
-
-// module.exports.user_creation= function(req,res){
-//     //check password
-//     if(req.body.password === req.body.confirm_password){
-//         //check if same user exist
-//         User.findOne( 
-//             {email:req.body.email},
-//             function(error, f_user){
-//                 if(error){console.log("error in finding users");return;}
-//                 //create user if it doesn't exit
-//                 else if(!f_user){
-//                     User.create(req.body,   //only the details given in the User schema will be added
-//                         function(error){
-//                             if(error){console.log("error in creating users");return;}
-//                         }
-//                     )
-//                     return res.redirect('/users/signin');
-//                 }
-//                 //if user already exist
-//                 else{
-//                     return res.redirect('back');
-//                 }
-//             }
-//         );
-//     }
-//     //passwords don't match
-//     else{
-//         res.redirect('back');
-//     }
-// }
 
 //  Sign In handeller
 module.exports.user_session= function(req,res){

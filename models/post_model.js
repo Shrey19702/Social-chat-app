@@ -16,7 +16,6 @@ const PostSchema = new mongoose.Schema (
                 ref : 'Comment'    
             }
         ]
-
     },
     {
         timestamps: true

@@ -3,50 +3,17 @@
 <section>
     <% if(locals.user){ %>
         <h4>Post something ...</h4>
-        <form action="/posts/createPost" method="post" >
+        <form action="/posts/createPost" id="user-post-form" method="post" >
             <textarea name="content" id="post-text" placeholder="say something" cols="30" rows="10"></textarea>
             <input type="submit" value="POST">
         </form>
     <%} %>
 
     <h3>POSTS</h3>
-    <ul>
+    <ul id="post-list-container">
         <% for(post of locals.posted){ %>
-            <li>
-                <div>
-                    <p>
-                        <%= post.content %> 
-                        &nbsp;
-                        <% if( (locals.user) && (locals.user.id == post.user.id) ){%> 
-                            <a href="/posts/deletePost/<%=post.id%>">X</a>
-                        <%}%>
-                    </p>
-                    <p><%= post.user.name %></p>
-                </div>
-                <div>
-                    <% if(locals.user){ %>
-                        <form action="/posts/comments/createComment" method="post" >
-                            <textarea name="content" id="comment-text" placeholder="comment something" cols="30" rows="3"></textarea>
-                            <input type="hidden" name="post" value="<%= post._id %>">
-                            <input type="submit" value="Comment">
-                        </form>
-                    <%}%>
-
-                    <p>Comments</p>
-                    <ul>
-                        <% for(comment of post.comments){ %>
-                           <p>
-                                <%= comment.user.name %> - <%= comment.content %>
-                                &emsp;
-                                <% if( (locals.user) && (locals.user.id == comment.user.id) ){%> 
-                                    <a href="/posts/comments/deleteComment/<%=comment.id%>">X</a>
-                                <%}%>
-                            </p>
-                        <% } %>
-                    </ul>
-
-                </div>
-            </li>
+            <%- include('_posts') -%>
         <% } %>    
     </ul>
 </section>
+<script src="/Js/postwall_post.js"></script>
